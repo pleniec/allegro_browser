@@ -1,0 +1,18 @@
+%div{ng: {controller: 'auctionsTableController'}}
+	%hr
+		%table{'ng-table' => 'auctionTable', class: 'table'}
+			%tr{'ng-repeat' => 'auction in $data'}
+				%td{'data-title' => '"Obrazek"'}
+					%img{'ng-src' => '{{ auction.s_it_thumb_url }}'}
+				%td{'data-title' => '"Nazwa"'}
+					{{ auction.s_it_name }}
+				%td{'data-title' => '"Cena"', sortable: '"price"'}
+					%div{'ng-if' => 'auction.s_it_buy_now_price != 0'}
+						{{ auction.s_it_buy_now_price }} zł
+					%div{'ng-if' => 'auction.s_it_buy_now_price == 0'}
+						{{ auction.s_it_price }} zł (licytacja)
+				%td{'data-title' => '"Data zakończenia"', sortable: '"date"'}
+					{{ 1000 * auction.s_it_ending_time | date:'yyyy-MM-dd HH:mm:ss' }}
+				%td{'data-title' => '"Akcje"'}
+					%button.btn.btn-default{'ng-click' => 'addToFavourites(auction.s_it_id)'}
+						Dodaj do ulubionych

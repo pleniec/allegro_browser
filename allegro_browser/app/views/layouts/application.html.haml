@@ -1,0 +1,15 @@
+!!! 5
+%html
+	%head
+		%title AllegroBrowser
+		= javascript_include_tag 'application'
+		= stylesheet_link_tag 'application'
+		= csrf_meta_tags
+	%body
+		.col-lg-10.col-lg-offset-1
+			.panel.panel-primary
+				.panel-heading
+					%h2
+						AllegroBrowser
+				.panel-body
+					= yield

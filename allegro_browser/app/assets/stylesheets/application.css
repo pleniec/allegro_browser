@@ -1,0 +1,6 @@
+//= require bootstrap
+//= require ng-table
+
+.link_cursor {
+	cursor: pointer;
+}

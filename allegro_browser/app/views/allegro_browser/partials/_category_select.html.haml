@@ -1,0 +1,9 @@
+%div{ng: {controller: 'categorySelectController'}}
+	%p{ng: {repeat: 'category in categoriesPath'}}
+		%a.link_cursor{ng: {if: '!$last', click: 'categoryClicked(category)'}}
+			{{ category.name }}
+		%strong{ng: {if: '$last'}}
+			{{ category.name }}
+	%select.form-control{ng: {model: 'selectedCategory',
+														options: 'category as category.name for category in categoriesInSelect',
+														change: 'categorySelected()'}}

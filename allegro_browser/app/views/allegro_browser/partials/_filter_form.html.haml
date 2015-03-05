@@ -1,0 +1,28 @@
+%div{ng: {controller: 'filterFormController', form: 'filterForm'}}
+	.form-group
+		%p
+			%strong
+				Słowo kluczowe
+		%p.text-danger{'ng-if' => 'filterForm.keyword.$invalid && filterForm.keyword.$dirty'}
+			Słowo kluczowe musi mieć przynajmniej 3 znaki
+		%input.form-control{ng: {model: 'filterFormData.keyword', change: 'filterFormChanged()', minlength: 3},
+												required: true,
+												name: 'keyword',
+												typeahead: 'a for a in getAutocomplete($viewValue)',
+												'typeahead-wait-ms' => 200, 'typeahead-min-length' => 3}
+	.form-group
+		.row
+			.col-lg-6
+				%label
+					Cena od (może być puste)
+				%p.text-danger{'ng-if' => 'filterForm.priceFrom.$invalid'}
+					Nieprawidłowa wartość
+				%input.form-control{type: :number, name: 'priceFrom', ng: {model: 'filterFormData.priceFrom', change: 'filterFormChanged()'}}
+			.col-lg-6
+				%label
+					Cena do (może być puste)
+				%p.text-danger{'ng-if' => 'filterForm.priceTo.$invalid'}
+					Nieprawidłowa wartość
+				%input.form-control{type: :number, name: 'priceTo', ng: {model: 'filterFormData.priceTo', change: 'filterFormChanged()'}}
+	%button.btn.btn-primary{ng: {disabled: 'filterForm.$invalid || filterForm.$pristine', click: 'searchClicked()'}}
+		Szukaj
